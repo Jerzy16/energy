@@ -8,7 +8,11 @@ export default [
             {
                 path: '',
                 loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent)
-            }
+            },
+            {
+              path: 'admin/user',
+              loadComponent: () => import('./user/user.component').then(m => m.UserComponent)
+          }
         ]
     }
 ] as Routes

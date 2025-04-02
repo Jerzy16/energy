@@ -1,13 +1,13 @@
+
 import { Component, Input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AutosizeModule } from 'ngx-autosize';
 import { LabelComponent } from "../label/label.component";
 import { CommonModule } from '@angular/common';
 import { ErrorMessageComponent } from "../error-message/error-message.component";
 
 @Component({
   selector: 'app-form-control',
-  imports: [AutosizeModule, ReactiveFormsModule, LabelComponent, CommonModule, ErrorMessageComponent],
+  imports: [ReactiveFormsModule, LabelComponent, CommonModule, ErrorMessageComponent],
   templateUrl: './form-control.component.html',
   styleUrl: './form-control.component.css',
   standalone: true

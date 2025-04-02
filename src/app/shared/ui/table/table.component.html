@@ -1,8 +1,8 @@
 <div class="overflow-x-auto rounded-lg shadow-md">
-  <table class="min-w-full border border-gray-300 dark:border-gray-700">
+  <table class="min-w-full border border-gray-300 ">
     <!-- Encabezado -->
     <thead
-      class="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+      class="bg-gray-200 text-gray-700 dark:text-gray-300"
     >
       <tr>
         @for (header of headers; track $index) {
@@ -10,18 +10,18 @@
           {{ header.label }}
         </th>
         }
-        <th class="px-6 py-3 text-left text-sm font-semibold uppercase">
+        <th class="px-6 py-3 text-center text-sm font-semibold uppercase">
           Acciones
         </th>
       </tr>
     </thead>
 
     <!-- Cuerpo -->
-    <tbody class="divide-y divide-gray-300 dark:divide-gray-700">
+    <tbody class="divide-y divide-gray-300 ">
       @for (item of paginatedData; track $index) {
-      <tr class="hover:bg-gray-100 dark:hover:bg-gray-900">
+      <tr class="hover:bg-gray-100 ">
         @for (header of headers; track $index) {
-        <td class="px-6 py-2 text-sm">
+        <td class="px-6 py-2 text-sm capitalize">
           @if (header.key === 'image') { @if (item[header.key]) {
           <img
             src="{{ item[header.key] }}"
@@ -36,11 +36,6 @@
         </td>
         }
         <td class="px-6 py-2 text-center">
-          <app-action-button
-            action="view"
-            [id]="item[keyField]"
-            (actionClicked)="openModal($event)"
-          ></app-action-button>
           <app-action-button
             action="edit"
             [id]="item[keyField]"

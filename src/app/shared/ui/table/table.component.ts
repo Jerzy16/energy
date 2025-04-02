@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft, faChevronRight, faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { ButtonComponent } from "../button/button.component";
-import { PaginatorComponent } from "../paginator/paginator.component";
 import { ActionButtonComponent } from "../action-button/action-button.component";
+import { PaginatorComponent } from "../paginator/paginator.component";
 
 interface Header {
   key: string;
@@ -11,12 +10,12 @@ interface Header {
 }
 
 interface DataItem {
-  [key: string]: any; 
+  [key: string]: any;
 }
 
 @Component({
   selector: 'app-table',
-  imports: [FontAwesomeModule, PaginatorComponent, ActionButtonComponent],
+  imports: [FontAwesomeModule, ActionButtonComponent, PaginatorComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
   standalone: true
@@ -25,10 +24,17 @@ export class TableComponent {
   @Input() headers: Header[] = [];
   @Input() data: DataItem[] = [];
   @Input() keyField: string = 'id';
-  
+
   @Output() actionClicked = new EventEmitter<{ action: string; id: any }>();
+
   currentPage = 1;
   itemsPerPage = 5;
+
+  faEdit = faEdit;
+  faEye = faEye;
+  faTrash = faTrash;
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
 
   get paginatedData(): DataItem[] {
     const start = (this.currentPage - 1) * this.itemsPerPage;
@@ -47,6 +53,6 @@ export class TableComponent {
   }
 
   openModal(event: { action: string; id: any }): void {
-    this.actionClicked.emit(event); 
+    this.actionClicked.emit(event);
   }
 }

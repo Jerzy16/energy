@@ -46,7 +46,7 @@ export class SidebarComponent {
   }
   activeGroup: string = '';
 
-  
+
   toggleGroup(groupLabel: string) {
     this.activeGroup = this.activeGroup === groupLabel ? '' : groupLabel;
   }
@@ -60,18 +60,18 @@ export class SidebarComponent {
     { type: 'item', icon: faCoffee, label: 'Dashboard', link: '/' },
     { type: 'separator', label: 'Otra sección' },
     {
-      type: 'group', 
-      icon: faUsers, 
+      type: 'group',
+      icon: faUsers,
       label: 'Gestión',
       items: [
-        { type: 'item', label: 'Usuarios', link: '/users' },
+        { type: 'item', label: 'Usuarios', link: '/admin/user' },
         { type: 'item', label: 'Roles', link: '/roles' }
       ]
     },
     { type: 'separator', label: 'Cuestionario' },
     {
-      type: 'group', 
-      icon: faUsers, 
+      type: 'group',
+      icon: faUsers,
       label: 'Mantenimiento',
       items: [
         { type: 'item', label: 'Preguntas', link: '/question' },

@@ -1,0 +1,45 @@
+<form action="">
+
+  <app-form-control
+    type="text"
+    [formType]="'text'"
+    label="Nombre"
+    [required]="true"
+    [controlName]="'firstName'"
+    [formGroup]="createForm"
+    [errorMessage]="firstNameErrors()"
+  />
+  <app-form-control
+    type="text"
+    [formType]="'text'"
+    label="Apellido"
+    [required]="true"
+    [controlName]="'lastName'"
+    [formGroup]="createForm"
+    [errorMessage]="lastNameErrors()"
+  />
+
+  <app-form-control
+    type="text"
+    [formType]="'text'"
+    label="Ciudad"
+    [required]="true"
+    [controlName]="'city'"
+    [formGroup]="createForm"
+    [errorMessage]="cityErros()"
+  />
+  <div class="flex items-center justify-end mt-4 gap-x-3">
+    <app-button
+      (clicked)="onSubmit()"
+      text="Guardar"
+      bgColor="bg-blue-700"
+      [icon]="getIcon('save')"
+    />
+    <app-button
+      (click)="closeModal()"
+      text="Cancelar"
+      bgColor="bg-red-700"
+      [icon]="getIcon('close')"
+    />
+  </div>
+</form>
