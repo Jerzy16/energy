@@ -1,0 +1,10 @@
+<div [formGroup]="formGroup" class="flex w-full flex-col gap-y-2 justify-between p-2">
+    <app-label label="{{label}}" [required]="required" />
+    @if (formType === 'text') {
+        <input [type]="type" class="w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-sm" placeholder="{{placeholder}}" [value]="value" [formControlName]="controlName" [ngClass]="{'focus:border-red-700': errors, 'focus:border-green-600': !errors}"/>
+        <app-error-message [message]="errorMessage" />
+    }@else {
+        <textarea autosize class="w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-sm" placeholder="{{placeholder}}" [value]="value" rows="1" [formControlName]="controlName" [ngClass]="{'focus:border-red-700': errors, 'focus:border-green-600': !errors}"></textarea>
+        <app-error-message [message]="errorMessage" />
+    }
+</div>

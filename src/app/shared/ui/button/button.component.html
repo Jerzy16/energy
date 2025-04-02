@@ -1,0 +1,24 @@
+<button
+  (click)="handleClick()"
+  [ngClass]="[
+    bgColor,
+    textColor,
+    padding,
+    disabled
+      ? 'opacity-50 cursor-not-allowed'
+      : 'hover:brightness-110 transition-all duration-300 hover:cursor-pointer',
+    rounded ? 'rounded-lg' : 'rounded-none'
+  ]"
+  [disabled]="disabled"
+  class="shadow-2xl flex items-center gap-x-2"
+  [type]="type"
+>
+  @if (icon) {
+  <fa-icon [icon]="icon" />
+  }
+  @if (text) {
+    <span>
+      {{ text }}
+    </span>
+  }
+</button>

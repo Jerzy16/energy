@@ -1,0 +1,15 @@
+<li class="w-full p-2 text-white">
+    <a
+      [routerLink]="link"
+      routerLinkActive="bg-white text-primary-950/90"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="w-full pl-8 flex items-center rounded-lg gap-x-4 py-4 transition-all text-md   hover:text-primary-950/90 hover:bg-white font-bold"
+      [ngClass]="'hover:border-' + borderColor"
+    >
+      @if (icon) {
+        <fa-icon [icon]="icon"></fa-icon>
+      }
+      <span>{{ label }}</span>
+    </a>
+  </li>
+  

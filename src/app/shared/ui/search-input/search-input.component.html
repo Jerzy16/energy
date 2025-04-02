@@ -1,0 +1,4 @@
+<div class="relative w-full">
+    <input type="text" class="py-2 pl-4 pr-7 outline-none w-full border-purple-400 border rounded-lg text-sm" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Buscar ...">
+    <fa-icon [icon]="getIcon('search')" class="absolute -top-1 right-2 translate-y-1/2 text-purple-700" />
+</div>

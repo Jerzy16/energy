@@ -1,0 +1,42 @@
+<aside
+  class="transition-all duration-200 ease-in-out h-svh overflow-y-auto bg-primary-950/90 text-white"
+  [ngClass]="{
+    'w-0': isOpen,
+    'w-64': !isOpen,
+  }"
+>
+  <div class="h-16 flex items-center justify-center">
+    <app-logo />
+  </div>
+  <nav class="py-2">
+    <ul>
+      @for (item of menuItems; track $index) {
+      <ng-container>
+        @if (item.type === 'item') {
+        <app-sidebar-item
+          [icon]="item.icon"
+          [label]="item.label"
+          [link]="item.link"
+        >
+        </app-sidebar-item>
+        } @if (item.type === 'separator') {
+        <span
+          class="px-2 py-2 w-full flex"
+        >
+          {{ item.label }}
+        </span>
+        } @if (item.type === 'group'){
+        <app-sidebar-group
+          [icon]="item.icon"
+          [label]="item.label"
+          [items]="item.items"
+          [isOpen]="activeGroup === item.label"
+          (toggle)="toggleGroup($event)"
+        >
+        </app-sidebar-group>
+        }
+      </ng-container>
+      }
+    </ul>
+  </nav>
+</aside>

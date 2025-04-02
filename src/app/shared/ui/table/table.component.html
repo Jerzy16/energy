@@ -1,0 +1,65 @@
+<div class="overflow-x-auto rounded-lg shadow-md">
+  <table class="min-w-full border border-gray-300 dark:border-gray-700">
+    <!-- Encabezado -->
+    <thead
+      class="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+    >
+      <tr>
+        @for (header of headers; track $index) {
+        <th class="px-6 py-3 text-left text-sm font-semibold uppercase">
+          {{ header.label }}
+        </th>
+        }
+        <th class="px-6 py-3 text-left text-sm font-semibold uppercase">
+          Acciones
+        </th>
+      </tr>
+    </thead>
+
+    <!-- Cuerpo -->
+    <tbody class="divide-y divide-gray-300 dark:divide-gray-700">
+      @for (item of paginatedData; track $index) {
+      <tr class="hover:bg-gray-100 dark:hover:bg-gray-900">
+        @for (header of headers; track $index) {
+        <td class="px-6 py-2 text-sm">
+          @if (header.key === 'image') { @if (item[header.key]) {
+          <img
+            src="{{ item[header.key] }}"
+            alt="{{ item[header.key] }}"
+            class="w-10 h-10 rounded-full object-cover"
+          />
+          } @else {
+          <span>No Image</span>
+          } } @else {
+          {{ item[header.key] }}
+          }
+        </td>
+        }
+        <td class="px-6 py-2 text-center">
+          <app-action-button
+            action="view"
+            [id]="item[keyField]"
+            (actionClicked)="openModal($event)"
+          ></app-action-button>
+          <app-action-button
+            action="edit"
+            [id]="item[keyField]"
+            (actionClicked)="openModal($event)"
+          ></app-action-button>
+          <app-action-button
+            action="delete"
+            [id]="item[keyField]"
+            (actionClicked)="openModal($event)"
+          ></app-action-button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <app-paginator
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="changePage($event)"
+  ></app-paginator>
+</div>

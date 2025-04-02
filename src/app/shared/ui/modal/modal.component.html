@@ -1,0 +1,30 @@
+@if(isModalOpen)
+{
+    <div class="fixed inset-0 bg-black/30 flex justify-center items-start z-50 p-4">
+        <div data-aos="fade-down" class="bg-white w-full md:w-1/2 rounded-lg p-4">
+            <div class="flex justify-between items-center border-b  py-2 px-4">
+                <h2 class="text-purple-700 font-bold">{{modalTitle}}</h2>
+                <app-tooltip position="top" text="Cerrar">
+                    <fa-icon [icon]="faClose" (click)="closeModal()" class="py-2 px-2.5 flex items-center bg-red-700 hover:bg-red-900 text-white rounded-2xl transition-colors duration-300 hover:cursor-pointer"></fa-icon>
+                </app-tooltip>
+            </div>
+            <div>
+                    @if(modalData?.action === 'create') {
+                        <ng-container >
+                            <ng-content select="[modal-create]"></ng-content>
+                        </ng-container>
+                    }
+                    @if(modalData?.action === 'view') {
+                        <ng-container>
+                            <ng-content select="[modal-view]"></ng-content>
+                        </ng-container>
+                    }
+                    @if(modalData?.action === 'edit') {
+                        <ng-container>
+                            <ng-content select="[modal-edit]"></ng-content>
+                        </ng-container>
+                    }
+            </div>
+        </div>
+    </div>
+}

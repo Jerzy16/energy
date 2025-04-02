@@ -1,0 +1,13 @@
+<app-tooltip [text]="label" position="top">
+  <button
+    (click)="handleClick()"
+    [class]="
+      buttonClass +
+      ' text-sm py-1 px-2 text-white transition-colors duration-300 hover:cursor-pointer'
+    "
+  >
+    @if (icon) {
+    <fa-icon [icon]="icon"></fa-icon>
+    }
+  </button>
+</app-tooltip>

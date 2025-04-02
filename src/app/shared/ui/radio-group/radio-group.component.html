@@ -1,0 +1,23 @@
+<div [formGroup]="formGroup" class="flex flex-col justify-center items-start gap-y-2 p-2 text-sm font-semibold text-gray-900/70">
+  <span>{{ label }}</span>
+  @for (option of options; track $index) {
+  <label class="flex items-center space-x-2 cursor-pointer">
+    <input
+      type="radio"
+      class="hidden peer"
+      [value]="option.value"
+      [formControlName]="controlName"
+    />
+    <fa-icon
+      [icon]="getIcon('circle')"
+      class="text-gray-500 text-xl peer-checked:hidden"
+    ></fa-icon>
+    <fa-icon
+      [icon]="getIcon('dot-circle')"
+      class="text-purple-600 text-xl hidden peer-checked:inline"
+    ></fa-icon>
+    <span class="text-black text-sm font-normal">{{ option.label }}</span>
+  </label>
+  }
+  <app-error-message [message]="errorMessage" />
+</div>
