@@ -2,9 +2,10 @@
   <table class="min-w-full border border-gray-300 ">
     <!-- Encabezado -->
     <thead
-      class="bg-gray-200 text-gray-700 dark:text-gray-300"
+      class="bg-gray-500 text-gray-700 dark:text-gray-100"
     >
       <tr>
+        <th class="px-6py-2 text-center">N°</th>
         @for (header of headers; track $index) {
         <th class="px-6 py-3 text-left text-sm font-semibold uppercase">
           {{ header.label }}
@@ -16,13 +17,15 @@
       </tr>
     </thead>
 
-    <!-- Cuerpo -->
-    <tbody class="divide-y divide-gray-300 ">
+    <!-- Cuerpo de la tabla -->
+    <tbody class="divide-y divide-gray-600 ">
       @for (item of paginatedData; track $index) {
       <tr class="hover:bg-gray-100 ">
-        @for (header of headers; track $index) {
+        <td class="px-6py-2 text-center">{{$index +1}}</td>
+        @for (header of headers; track $index + 1 ) {
         <td class="px-6 py-2 text-sm capitalize">
-          @if (header.key === 'image') { @if (item[header.key]) {
+          @if (header.key === 'image')
+          { @if (item[header.key]) {
           <img
             src="{{ item[header.key] }}"
             alt="{{ item[header.key] }}"

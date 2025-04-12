@@ -39,19 +39,27 @@ export class UserComponent {
   }
 
   headers: Header[] = [
-    { key: 'firstName', label: 'Nombre' },
-    { key: 'lastName', label: 'Apellido' },
-    { key: 'city', label: 'Ciudad' },
+    { key: 'nomUsu', label: 'Nombre' },
+    { key: 'apeUsu', label: 'Apellido paterno' },
+    { key: 'apmUsu', label: 'Apellido materno' },
+    { key: 'docUsu', label: 'DNI' },
+    { key: 'passUsu', label: 'Contraseña' },
+    { key: 'emaUsu', label: 'correo' },
+    { key: 'celUsu', label: 'celular' },
+    { key: 'sexUsu', label: 'sexo' },
+    { key: 'estUsu', label: 'estado' },
+    { key: 'createdAt', label: 'fecha creado' },
+    { key: 'updatedAt', label: 'fecha actual' },
   ];
 
   data: [] = [];
-  user = {}
+  usuario = {}
   isLoading = false;
-
+// Para mostrar el loading
   ngOnInit() {
     this.getAll();
   }
-
+// Método para obtener todos los usuarios
   getAll(): void {
     this.isLoading = true;
     this.userService.getUser().subscribe({
@@ -67,25 +75,25 @@ export class UserComponent {
       }
     });
   }
-
+// Método para abrir el modal de crear
   openCreateModal(): void {
     this.modalService.openModal('create');
   }
-
+// Método para abrir el modal de editar
   openEditModal(item: DataItem): void {
     this.modalService.openModal('edit', item);
-    this.user = item
+    this.usuario = item
   }
-
+// Método para abrir el modal de ver
   openViewModal(item: DataItem): void {
     this.modalService.openModal('view', item);
     console.log(item);
   }
+  // Método para abrir el modal de eliminar
 
   handleAction(event: { action: string; id: number }): void {
-    const selectedItem = this.data.find((item) => item['id'] === event.id);
+    const selectedItem = this.data.find((item) => item['codUsu'] === event.id);
     if (!selectedItem) return;
-
     if (event.action === 'edit') {
       this.openEditModal(selectedItem);
     } else if (event.action === 'view') {
@@ -108,11 +116,10 @@ export class UserComponent {
       });
     }
   }
-
+// Método para buscar usuarios
   refreshData(): void {
     this.getAll();
   }
-
   openModal(): void {
     this.modalService.openModal('create', {});
   }

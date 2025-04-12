@@ -9,18 +9,18 @@ export class UserService {
   private http = inject(HttpClient);
 
   getUser(): Observable<any> {
-    return this.http.get<any>('http://localhost:8080/user/getall');
+    return this.http.get<any>('http://localhost:8080/usuario/getall');
   }
 
-  saveUser(user: any) {
-    return this.http.post('http://localhost:8080/user/save', user);
+  saveUser(codUsu: any) {
+    return this.http.post('http://localhost:8080/usuario/save', codUsu);
   }
 
   delete(id: number) {
-    return this.http.delete('http://localhost:8080/user/'+id);
+    return this.http.delete('http://localhost:8080/usuario/delete/'+id);
   }
 
-  updateUser(id: number, user: any) {
-    return this.http.post('http://localhost:8080/user/save/'+id, user);
+  updateUser(id: number, usuario: any) {
+    return this.http.post('http://localhost:8080/usuario/update/'+id, usuario);
   }
 }

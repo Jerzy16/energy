@@ -1,33 +1,107 @@
 <form action="">
 
-  <app-form-control
+  <div class="grid grid-cols-2 items-center">
+    <app-form-control
     type="text"
     [formType]="'text'"
     label="Nombre"
     [required]="true"
-    [controlName]="'firstName'"
+    [controlName]="'nomUsu'"
     [formGroup]="createForm"
-    [errorMessage]="firstNameErrors()"
+    [errorMessage]="nomUsuErrors()"
   />
   <app-form-control
     type="text"
     [formType]="'text'"
-    label="Apellido"
+    label="Apellido Paterno"
     [required]="true"
-    [controlName]="'lastName'"
+    [controlName]="'apeUsu'"
     [formGroup]="createForm"
-    [errorMessage]="lastNameErrors()"
+    [errorMessage]="apeUsuErrors()"
   />
+  <app-form-control
+    type="text"
+    [formType]="'text'"
+    label="Apellido Materno"
+    [required]="true"
+    [controlName]="'apmUsu'"
+    [formGroup]="createForm"
+    [errorMessage]="apmUsuErros()"
+  />
+  <app-form-control
+  type_="text"
+  [formType]="'text'"
+  label="DNI"
+  [required]="true"
+  [controlName]="'docUsu'"
+  [formGroup]="createForm"
+  [errorMessage]="docUsuErrors()"
+  />
+  <app-form-control
+  type="text"
+  [formType]="'text'"
+  label="Contraseña"
+  [required]="true"
+  [controlName]="'passUsu'"
+  [formGroup]="createForm"
+  [errorMessage]="passUsuErrors()"
+/>
+<app-form-control
+  type="text"
+  [formType]="'text'"
+  label="Correo"
+  [required]="true"
+  [controlName]="'emaUsu'"
+  [formGroup]="createForm"
+  [errorMessage]="emaUsuErrors()"
+/>
+<app-form-control
+  type="text"
+  [formType]="'text'"
+  label="Celular"
+  [required]="true"
+  [controlName]="'celUsu'"
+  [formGroup]="createForm"
+  [errorMessage]="celUsuErrors()"
+/>
+<app-form-control
+  type="text"
+  [formType]="'text'"
+  label="Sexo"
+  [required]="true"
+  [controlName]="'sexUsu'"
+  [formGroup]="createForm"
+  [errorMessage]="sexUsuErrors()"
+/>
+<app-form-control
+  type="text"
+  [formType]="'text'"
+  label="Estado"
+  [required]="true"
+  [controlName]="'estUsu'"
+  [formGroup]="createForm"
+  [errorMessage]="estUsuErrors()"
+/>
+<app-form-control
+  type="text"
+  [formType]="'text'"
+  label="fecha de creacion"
+  [required]="true"
+  [controlName]="'createdAt'"
+  [formGroup]="createForm"
+  [errorMessage]="createdAtErrors()"
+/>
+<app-form-control
+  type="text"
+  [formType]="'text'"
+  label="fecha de actualizacion"
+  [required]="true"
+  [controlName]="'updatedAt'"
+  [formGroup]="createForm"
+  [errorMessage]="updatedAtErrors()"
+/>
+  </div>
 
-  <app-form-control
-    type="text"
-    [formType]="'text'"
-    label="Ciudad"
-    [required]="true"
-    [controlName]="'city'"
-    [formGroup]="createForm"
-    [errorMessage]="cityErros()"
-  />
   <div class="flex items-center justify-end mt-4 gap-x-3">
     <app-button
       (clicked)="onSubmit()"

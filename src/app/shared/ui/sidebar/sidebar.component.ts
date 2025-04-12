@@ -12,7 +12,6 @@ interface SidebarItem {
   label: string;
   link: string;
 }
-
 interface SidebarGroup {
   type: 'group';
   icon: IconDefinition;
@@ -46,7 +45,6 @@ export class SidebarComponent {
   }
   activeGroup: string = '';
 
-
   toggleGroup(groupLabel: string) {
     this.activeGroup = this.activeGroup === groupLabel ? '' : groupLabel;
   }
@@ -54,32 +52,24 @@ export class SidebarComponent {
   faCoffee = faCoffee
   faUsers = faUsers
   faKey = faKey
-
+//menu interface
   menuItems: SidebarMenuItem[] = [
     { type: 'separator', label: 'Dashboard' },
     { type: 'item', icon: faCoffee, label: 'Dashboard', link: '/' },
     { type: 'separator', label: 'Otra sección' },
-    {
-      type: 'group',
-      icon: faUsers,
-      label: 'Gestión',
+    { type: 'group',icon: faUsers,label: 'Gestión',
       items: [
         { type: 'item', label: 'Usuarios', link: '/admin/user' },
-        { type: 'item', label: 'Roles', link: '/roles' }
+        { type: 'item', label: 'Roles', link: '/admin/roles' }
       ]
     },
     { type: 'separator', label: 'Cuestionario' },
-    {
-      type: 'group',
-      icon: faUsers,
-      label: 'Mantenimiento',
+    { type: 'group',icon: faUsers,label: 'Mantenimiento',
       items: [
         { type: 'item', label: 'Preguntas', link: '/question' },
         { type: 'item', label: 'Roles', link: '/roles' },
         { type: 'item', label: 'Roles', link: '/roles' }
       ]
     },
-    { type: 'separator', label: 'Dashboard' },
-    { type: 'item', icon: faCoffee, label: 'Dashboard', link: '/s' },
   ];
 }

@@ -18,37 +18,77 @@ import { ButtonComponent } from "../../../../shared/ui/button/button.component";
 export class UserModalComponent {
   @Output() refresh = new EventEmitter<void>();
   @Input() data = {}
-
+// Para recibir los datos del usuario a editar
   modalService = inject(ModalService);
   errorService = inject(ValidationErrorService);
   iconService = inject(IconService);
   fb = inject(FormBuilder);
   userService = inject(UserService);
   alertService = inject(AlertService);
-
+// Para inyectar los servicios necesarios
+  // Para crear el formulario reactivo
   createForm: FormGroup = this.fb.group({
-    id: [null],
-    firstName: [[], [Validators.required, Validators.minLength(3)]],
-    lastName: [[], [Validators.required, Validators.minLength(3)]],
-    city: [[], [Validators.required, Validators.minLength(3)]],
+    codUsu: [null],
+    nomUsu: [[], [Validators.required, Validators.minLength(3)]],
+    apeUsu: [[], [Validators.required, Validators.minLength(3)]],
+    apmUsu: [[], [Validators.required, Validators.minLength(3)]],
+    docUsu: [[], [Validators.required, Validators.minLength(8)]],
+    passUsu:[[], [Validators.required, Validators.minLength(8)]],
+    emaUsu: [[], [Validators.required, Validators.email]],
+    celUsu: [[], [Validators.required, Validators.minLength(9)]],
+    sexUsu: [[], [Validators.required]],
+    estUsu: [[], [Validators.required]],
+    createdAt: [new Date()],
+    updatedAt: [new Date()],
   });
+// Para crear el formulario reactivo
+  // Para crear los errores de validación
+  nomUsuErrors = signal<string[]>([]);
+  apeUsuErrors = signal<string[]>([]);
+  apmUsuErros = signal<string[]>([]);
+  docUsuErrors = signal<string[]>([]);
+  passUsuErrors = signal<string[]>([]);
+  emaUsuErrors = signal<string[]>([]);
+  celUsuErrors = signal<string[]>([]);
+  sexUsuErrors = signal<string[]>([]);
+  estUsuErrors = signal<string[]>([]);
+  createdAtErrors = signal<string[]>([]);
+  updatedAtErrors = signal<string[]>([]);
 
-  firstNameErrors = signal<string[]>([]);
-  lastNameErrors = signal<string[]>([]);
-  cityErros = signal<string[]>([]);
-
-
+// Para crear los errores de validación
   constructor() {
-    this.firstNameFb.valueChanges.subscribe(() => {
-      this.getFirstNameErrors();
+    this.nomUsuFb.valueChanges.subscribe(() => {
+      this.getnomUsuErrors();
     });
-
-    this.lastNameFb.valueChanges.subscribe(() => {
-      this.getLastNameErrors();
+    this.apeUsuFb.valueChanges.subscribe(() => {
+      this.getapeUsuErrors();
     });
-
-    this.cityFb.valueChanges.subscribe(() => {
-      this.getCityErrors();
+    this.apmUsuFb.valueChanges.subscribe(() => {
+      this.getapmUsuErrors();
+    });
+    this.docUsuFb.valueChanges.subscribe(() => {
+      this.getdocUsuErrors();
+    });
+    this.passUsuFb.valueChanges.subscribe(() => {
+      this.getpassUsuErrors();
+    });
+    this.emaUsuFb.valueChanges.subscribe(() => {
+      this.getemaUsuErrors();
+    });
+    this.celUsuFb.valueChanges.subscribe(() => {
+      this.getcelUsuErrors();
+    });
+    this.sexUsuFb.valueChanges.subscribe(() => {
+      this.getsexUsuErrors();
+    });
+    this.estUsuFb.valueChanges.subscribe(() => {
+      this.getestUsuErrors();
+    });
+    this.createdAtFb.valueChanges.subscribe(() => {
+      this.getcreatedAtErrors();
+    });
+    this.updatedAtFb.valueChanges.subscribe(() => {
+      this.getupdatedAtErrors();
     });
     console.log(this.data)
   }
@@ -61,63 +101,121 @@ export class UserModalComponent {
       this.isEditMode = true;
       this.createForm.patchValue(this.data);
     }
-
-    this.firstNameFb.valueChanges.subscribe(() => this.getFirstNameErrors());
-    this.lastNameFb.valueChanges.subscribe(() => this.getLastNameErrors());
-    this.cityFb.valueChanges.subscribe(() => this.getCityErrors());
+    this.nomUsuFb.valueChanges.subscribe(() => this.getnomUsuErrors());
+    this.apeUsuFb.valueChanges.subscribe(() => this.getapeUsuErrors());
+    this.apmUsuFb.valueChanges.subscribe(() => this.getapmUsuErrors());
+    this.docUsuFb.valueChanges.subscribe(() => this.getdocUsuErrors());
+    this.passUsuFb.valueChanges.subscribe(() => this.getpassUsuErrors());
+    this.emaUsuFb.valueChanges.subscribe(() => this.getemaUsuErrors());
+    this.celUsuFb.valueChanges.subscribe(() => this.getcelUsuErrors());
+    this.sexUsuFb.valueChanges.subscribe(() => this.getsexUsuErrors());
+    this.estUsuFb.valueChanges.subscribe(() => this.getestUsuErrors());
+    this.createdAtFb.valueChanges.subscribe(() => this.getcreatedAtErrors());
+    this.updatedAtFb.valueChanges.subscribe(() => this.getupdatedAtErrors());
   }
+// Método para obtener el formulario
+  get nomUsuFb() {return this.createForm?.controls['nomUsu'];}
+  get apeUsuFb() {return this.createForm?.controls['apeUsu'];}
+  get apmUsuFb() {return this.createForm?.controls['apmUsu'];}
+  get docUsuFb() {return this.createForm?.controls['docUsu'];}
+  get passUsuFb() {return this.createForm?.controls['passUsu'];}
+  get emaUsuFb() {return this.createForm?.controls['emaUsu'];}
+  get celUsuFb() {return this.createForm?.controls['celUsu'];}
+  get sexUsuFb() {return this.createForm?.controls['sexUsu'];}
+  get estUsuFb() {return this.createForm?.controls['estUsu'];}
+  get createdAtFb() {return this.createForm?.controls['createdAt'];}
+  get updatedAtFb() {return this.createForm?.controls['updatedAt'];}
 
-  get firstNameFb() {
-    return this.createForm?.controls['firstName'];
-  }
-
-  get lastNameFb() {
-    return this.createForm?.controls['lastName'];
-  }
-
-  get cityFb() {
-    return this.createForm?.controls['city'];
-  }
-
-
-  getFirstNameErrors() {
-    return this.firstNameErrors.set(
-      this.errorService.getErrors(this.createForm.get('firstName'), 'Nombre')
+// Método para obtener los errores del campo nombre
+  getnomUsuErrors() {
+    return this.nomUsuErrors.set(
+      this.errorService.getErrors(this.createForm.get('nomUsu'), 'Nombre')
     );
   }
-
-  getLastNameErrors() {
-    return this.lastNameErrors.set(
-      this.errorService.getErrors(
-        this.createForm.get('lastName'),
-        'Apellido'
-      )
+// Método para obtener los errores del campo apellido
+  getapeUsuErrors() {
+    return this.apeUsuErrors.set(
+      this.errorService.getErrors(this.createForm.get('apeUsu'),'Apellido paterno')
     );
   }
-  getCityErrors() {
-    return this.lastNameErrors.set(
-      this.errorService.getErrors(
-        this.createForm.get('city'),
-        'Ciudad'
-      )
+// Método para obtener los errores del campo apellido materno
+  getapmUsuErrors() {
+    return this.apeUsuErrors.set(
+      this.errorService.getErrors(this.createForm.get('apmUsu'),'Apellido materno')
     );
   }
-
+// Método para obtener los errores del campo dni
+  getdocUsuErrors() {
+    return this.docUsuErrors.set(
+      this.errorService.getErrors(this.createForm.get('docUsu'), 'DNI')
+    );
+  }
+// Método para obtener los errores del campo contraseña
+    getpassUsuErrors() {
+      return this.passUsuErrors.set(
+        this.errorService.getErrors(this.createForm.get('passUsu'), 'Contraseña')
+      );
+    }
+// Método para obtener los errores del campo correo
+  getemaUsuErrors() {
+    return this.emaUsuErrors.set(
+      this.errorService.getErrors(this.createForm.get('emaUsu'), 'correo')
+    );
+  }
+// Método para obtener los errores del campo celular
+  getcelUsuErrors() {
+    return this.celUsuErrors.set(
+      this.errorService.getErrors(this.createForm.get('celUsu'), 'celular')
+    );
+  }
+// Método para obtener los errores del campo sexo
+  getsexUsuErrors() {
+    return this.sexUsuErrors.set(
+      this.errorService.getErrors(this.createForm.get('sexUsu'), 'sexo')
+    );
+  }
+// Método para obtener los errores del campo estado
+  getestUsuErrors() {
+    return this.estUsuErrors.set(
+      this.errorService.getErrors(this.createForm.get('estUsu'), 'estado')
+    );
+  }
+// Método para obtener los errores del campo fecha creado
+  getcreatedAtErrors() {
+    return this.createdAtErrors.set(
+      this.errorService.getErrors(this.createForm.get('createdAt'), 'fecha creado')
+    );
+  }
+// Método para obtener los errores del campo fecha actualizado
+  getupdatedAtErrors() {
+    return this.updatedAtErrors.set(
+      this.errorService.getErrors(this.createForm.get('updatedAt'), 'fecha actualizado')
+    );
+  }
+// Método para obtener el icono
   getIcon(name: string): IconDefinition {
     return this.iconService.getIcon(name);
   }
-
+// Método para abrir el modal
   onSubmit(): void {
     if (!this.createForm.valid) {
-      this.getFirstNameErrors();
-      this.getLastNameErrors();
-      this.getCityErrors();
+      this.getnomUsuErrors();
+      this.getapeUsuErrors();
+      this.getapmUsuErrors();
+      this.getdocUsuErrors();
+      this.getpassUsuErrors();
+      this.getemaUsuErrors();
+      this.getcelUsuErrors();
+      this.getsexUsuErrors();
+      this.getestUsuErrors();
+      this.getcreatedAtErrors();
+      this.getupdatedAtErrors();
       return;
     }
-
+// Si el formulario no es válido, no se envía
     if (this.isEditMode) {
       // Modo actualización
-      this.userService.updateUser(this.createForm.value.id, this.createForm.value).subscribe({
+      this.userService.updateUser(this.createForm.value.CodUsu, this.createForm.value).subscribe({
         next: () => {
           this.alertService.toast('Usuario actualizado con éxito');
           this.refresh.emit();
@@ -141,15 +239,23 @@ export class UserModalComponent {
       });
     }
   }
-
+// Método para cerrar el modal
   closeModal(): void {
     this.modalService.closeModal();
   }
-
+  // Método para cerrar el modal y limpiar el formulario
   clearForm(): void {
     this.createForm.reset();
-    this.firstNameErrors.set([]);
-    this.lastNameErrors.set([]);
-    this.cityErros.set([]);
+    this.nomUsuErrors.set([]);
+    this.apeUsuErrors.set([]);
+    this.apmUsuErros.set([]);
+    this.docUsuErrors.set([]);
+    this.passUsuErrors.set([]);
+    this.emaUsuErrors.set([]);
+    this.celUsuErrors.set([]);
+    this.sexUsuErrors.set([]);
+    this.estUsuErrors.set([]);
+    this.createdAtErrors.set([]);
+    this.updatedAtErrors.set([]);
   }
 }
